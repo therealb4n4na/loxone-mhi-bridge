@@ -1,20 +1,20 @@
 # Changelog
 
-Alle nennenswerten Änderungen an diesem Projekt werden hier dokumentiert.
-Das Format orientiert sich an [Keep a Changelog](https://keepachangelog.com/) und die Versionierung an [Semantic Versioning](https://semver.org/).
+All notable changes to this project are documented here.
+The format is based on [Keep a Changelog](https://keepachangelog.com/) and the project follows [Semantic Versioning](https://semver.org/).
 
 ## [Unreleased]
 
-### Added
+### Changed
 
-- Noch keine unveröffentlichten Änderungen.
+- Standardized the public documentation and issue templates in English.
 
 ## [3.3.0] - 2026-09-09
 
 ### Added
 
-- Erster dokumentierter öffentlicher Release-Stand.
-- MHI WF-RAC air-conditioner control, passive polling, command verification and shared outdoor-unit handling.
-- Beispielkonfigurationen ohne produktive Zugangsdaten.
-- Loxone- und Troubleshooting-Dokumentation.
-- MIT-Lizenz.
+- First documented public release.
+- MHI WF-RAC air-conditioner control with passive polling, command verification, and shared outdoor-unit conflict handling.
+- Example configuration files without production credentials.
+- Loxone integration and troubleshooting documentation.
+- MIT License.

@@ -1,20 +1,20 @@
 # Security Policy
 
-Diese Projekte laufen typischerweise im lokalen Smart-Home-Netz und einige Endpunkte können reale Geräte steuern. Sicherheit sollte deshalb nicht nur auf die Netzwerk-Firewall reduziert werden.
+These projects typically run inside a local smart-home network, and some endpoints can control physical devices. Security should therefore not rely on the network firewall alone.
 
-## Grundregeln
+## Basic rules
 
-- produktive Zugangsdaten und Tokens niemals committen,
-- Beispielkonfigurationen statt echter Konfigurationen veröffentlichen,
-- Schreibzugriffe nach Möglichkeit auf die Steuerinstanz (z. B. Loxone) begrenzen,
-- Dienste nur in vertrauenswürdigen Netzen bereitstellen,
-- öffentliche Portfreigaben ins Internet vermeiden,
-- Logs und Screenshots vor dem Teilen auf Geheimnisse und personenbezogene Daten prüfen.
+- never commit production credentials or tokens,
+- publish example configuration files instead of real configuration,
+- restrict write access to the intended controller (for example Loxone) where possible,
+- expose services only inside trusted networks,
+- avoid forwarding control ports directly to the public Internet,
+- review logs and screenshots for secrets, identifiers, and personal information before sharing them.
 
-## Sicherheitsproblem melden
+## Reporting a security issue
 
-Bitte offensichtliche Sicherheitslücken **nicht zuerst mit vollständigen Exploit-Details in einem öffentlichen Issue veröffentlichen**. Nutze nach Möglichkeit GitHubs private Security-Advisory-/Reporting-Funktion des Repositorys. Falls diese Funktion nicht verfügbar ist, eröffne zunächst ein knappes Issue ohne Secrets oder ausnutzbare Details, damit ein privater Kommunikationsweg vereinbart werden kann.
+Please do **not** publish an obvious vulnerability together with complete exploit details in a public issue first. Prefer GitHub's private vulnerability reporting / Security Advisory functionality when available. If private reporting is unavailable, open a minimal public issue without secrets or actionable exploit details so that a private communication channel can be arranged.
 
-## Unterstützte Versionen
+## Supported versions
 
-Solange das Projekt klein ist, wird grundsätzlich nur der aktuelle Stand des `main`-Branches bzw. das neueste Release aktiv gepflegt.
+While these projects remain small, only the latest release and the current `main` branch are actively maintained.

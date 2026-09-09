@@ -1,23 +1,23 @@
 ---
 name: Feature request
-about: Verbesserung oder neue Funktion vorschlagen
+about: Suggest an improvement or new feature
 title: "[Feature] "
 labels: ""
 assignees: ""
 ---
 
-## Ziel
+## Goal
 
-Was soll verbessert oder ergänzt werden?
+What should be improved or added?
 
-## Anwendungsfall
+## Use case
 
-Warum ist die Funktion nützlich und wie würde sie verwendet?
+Why is the feature useful and how would it be used?
 
-## Technischer Kontext
+## Technical context
 
-Falls bekannt: relevante Geräte, APIs, Datenpunkte oder Einschränkungen.
+If known: relevant devices, APIs, data points, protocol details, or constraints.
 
-## Mögliche Umsetzung
+## Possible implementation
 
-Optional: eigener Lösungsvorschlag oder bereits getestete Ansätze.
+Optional: your proposed solution or approaches you have already tested.

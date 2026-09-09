@@ -1,54 +1,55 @@
 # Contributing
 
-Beiträge sind willkommen. Issues und Pull Requests können auf **Deutsch oder Englisch** erstellt werden.
+Contributions are welcome. **English is preferred** for issues, pull requests, documentation, and code review so that the projects remain accessible to an international audience.
 
-## Bevor du ein Issue erstellst
+## Before opening an issue
 
-Bitte prüfe zuerst:
+Please check first:
 
-1. ob das Verhalten mit der aktuellen Version reproduzierbar ist,
-2. ob [`docs/troubleshooting.md`](docs/troubleshooting.md) den Fehler bereits beschreibt,
-3. ob Logs oder Statusdaten den Fehler eingrenzen,
-4. ob Zugangsdaten, Tokens, interne IP-Adressen oder andere private Daten aus Logs/Screenshots entfernt wurden.
+1. whether the behavior is reproducible with the current version,
+2. whether [`docs/troubleshooting.md`](docs/troubleshooting.md) already covers the problem,
+3. whether logs or status data help narrow down the cause,
+4. whether credentials, tokens, internal IP addresses, serial numbers, or other private information have been removed from logs and screenshots.
 
-## Bug Reports
+## Bug reports
 
-Ein guter Bug Report enthält möglichst:
+A useful bug report should include, where applicable:
 
-- verwendete Hardware / Gateway / Adapter,
-- Betriebssystem und Python-Version,
-- Projektversion bzw. Git-Tag,
-- genaue Schritte zum Reproduzieren,
-- erwartetes und tatsächliches Verhalten,
-- relevante Logzeilen,
-- bereits durchgeführte Tests.
+- hardware / gateway / adapter model,
+- firmware version,
+- operating system and Python version,
+- project version or Git tag,
+- exact steps to reproduce,
+- expected and actual behavior,
+- relevant log lines,
+- tests already performed.
 
-Bitte **niemals** Passwörter, API-Keys, Tokens, private Schlüssel oder vollständige produktive Konfigurationsdateien veröffentlichen.
+Never publish passwords, API keys, tokens, private keys, full production configuration files, or session data.
 
-## Pull Requests
+## Pull requests
 
-Änderungen sollten:
+Changes should:
 
-- einen klar abgegrenzten Zweck haben,
-- bestehendes Verhalten nicht unbeabsichtigt verändern,
-- verständlich kommentiert sein, wenn die Logik nicht offensichtlich ist,
-- bei neuen Funktionen die README bzw. passende Datei unter `docs/` aktualisieren,
-- keine produktiven Zugangsdaten, Logs, State-Dateien oder Backups enthalten.
+- have a clearly defined purpose,
+- avoid unintentionally changing existing behavior,
+- include comments where the logic is not obvious,
+- update the README or relevant file under `docs/` when behavior changes,
+- never include production credentials, logs, state files, captures, or backups.
 
-Vor einem Pull Request bitte mindestens die Python-Syntax prüfen:
+Before opening a pull request, perform at least a Python syntax check for modified Python files:
 
 ```bash
 python3 -m py_compile <script.py>
 ```
 
-Bei Änderungen an Steuerbefehlen oder Gerätekommunikation bitte zusätzlich beschreiben, **wie die Änderung real getestet wurde**.
+For changes to device communication or control commands, also describe **how the change was tested on real hardware**.
 
-## Verifizierungsgrad
+## Verification level
 
-Bei Reverse Engineering oder gerätespezifischen Erkenntnissen bitte möglichst kennzeichnen:
+For reverse-engineered or device-specific findings, please distinguish between:
 
-- **Verifiziert** – mehrfach am realen Gerät bestätigt
-- **Experimentell** – plausibel und getestet, aber noch nicht ausreichend breit bestätigt
-- **Unbekannt** – beobachtet, Bedeutung oder Ursache noch offen
+- **Verified** – reproduced multiple times on real hardware
+- **Experimental** – plausible and tested, but not yet broadly confirmed
+- **Unknown** – observed, but meaning or cause is still unclear
 
-Das erleichtert anderen Nutzern die Einschätzung und verhindert, dass Vermutungen später als gesicherte Fakten weitergegeben werden.
+This helps prevent assumptions from later being repeated as established facts.

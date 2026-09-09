@@ -1,75 +1,75 @@
 # Loxone MHI WF-RAC Bridge
 
 <!-- project-meta -->
-> **Status:** Stable · **Current release:** `v3.3.0` · **License:** MIT · **Documentation:** Deutsch · **Issues/PRs:** Deutsch or English
+> **Status:** Stable · **Current release:** `v3.3.0` · **License:** MIT · **Documentation:** English · **Issues/PRs:** English preferred
 
-[Changelog](CHANGELOG.md) · [Contributing](CONTRIBUTING.md) · [Security](SECURITY.md) · [Loxone-Doku](docs/loxone.md) · [Troubleshooting](docs/troubleshooting.md) · [Project collection](https://github.com/therealb4n4na/loxone-smart-home-projects)
+[Changelog](CHANGELOG.md) · [Contributing](CONTRIBUTING.md) · [Security](SECURITY.md) · [Loxone integration](docs/loxone.md) · [Troubleshooting](docs/troubleshooting.md) · [Project collection](https://github.com/therealb4n4na/loxone-smart-home-projects)
 <!-- /project-meta -->
 
-Lokale Python-Bridge zur Einbindung von Mitsubishi Heavy Industries Klimageräten mit WF-RAC WLAN-Adaptern in Loxone.
+A local Python bridge for integrating Mitsubishi Heavy Industries air conditioners equipped with WF-RAC Wi-Fi adapters into Loxone.
 
-Das Projekt verfolgt ein wichtiges Prinzip: **Polling ist ausschließlich lesend.** Die Klimageräte werden nur verändert, wenn ein expliziter Steuerbefehl eingeht. Dadurch bleiben Fernbedienung und andere Bedienwege weiterhin nutzbar.
+A core design rule of this project is: **polling is read-only**. The bridge only changes an air conditioner when an explicit control request is received. This keeps the physical remote control and other control paths usable instead of constantly forcing the last Loxone state back onto the device.
 
-## Funktionen
+## Features
 
-- lokales zyklisches Auslesen mehrerer WF-RAC-Geräte
-- Power, Betriebsart, Solltemperatur, Lüfterstufe und Luftführung
-- HTTP-API für Loxone
-- explizite Write-Verifikation durch Rücklesen
-- Retry-/Timeout-Logik
-- Erkennung von Geräteausfällen und Recovery
-- persistenter Loxone-Sollzustand (`intent`)
-- Erkennung externer Änderungen (`EXTERNAL_DRIFT`)
-- Gruppenlogik für mehrere Innengeräte an einer gemeinsamen Außeneinheit
-- rotierende Logs
-- Schreibzugriff nur von der freigegebenen Loxone-IP
+- local polling of multiple WF-RAC devices
+- power, operating mode, target temperature, fan speed, and airflow control
+- HTTP API designed for Loxone
+- explicit write verification by reading the device state back
+- retry and timeout handling
+- offline / recovery detection
+- persistent Loxone intent state
+- detection of external changes via `EXTERNAL_DRIFT`
+- group logic for multiple indoor units sharing one outdoor unit
+- rotating logs
+- write access restricted to the configured controller IP
 
-## Architektur
+## Architecture
 
 ```text
-                   ┌──────── Fernbedienung / andere Bedienung
-                   │
-MHI WF-RAC Geräte ◄┼──── lokale WF-RAC Kommunikation
-        ▲          │
-        │          │
-        │      mhi_bridge.py :8091
-        │        ├─ passiver Poller
-        │        ├─ State Cache
-        │        ├─ Intent Cache
-        │        ├─ Verifikation
-        │        └─ Gruppen-/Konfliktlogik
-        │                  ▲
-        └──────────────────┤
-                           │ HTTP
-                         Loxone
+                      ┌──────── Remote control / other control path
+                      │
+MHI WF-RAC devices ◄──┼──── local WF-RAC communication
+        ▲             │
+        │             │
+        │       mhi_bridge.py :8091
+        │         ├─ passive poller
+        │         ├─ state cache
+        │         ├─ intent cache
+        │         ├─ write verification
+        │         └─ group / conflict logic
+        │                    ▲
+        └────────────────────┤
+                             │ HTTP
+                           Loxone
 ```
 
-## Warum ein Intent?
+## Why keep a separate intent state?
 
-Der tatsächliche Gerätezustand und der zuletzt von Loxone gewünschte Zustand sind nicht immer dasselbe. Beispielsweise kann eine Fernbedienung verwendet werden oder ein Gerät nach dem Ausschalten kurz andere interne Werte melden.
+The actual device state and the state most recently requested by Loxone are not always identical. A user may operate the physical remote, another application may change the unit, or the device may temporarily report standby-related values after power-off.
 
-Die Bridge speichert deshalb getrennt:
+The bridge therefore tracks two separate concepts:
 
-- **Ist-Zustand** des Geräts
-- **Loxone-Intent** als zuletzt gewünschten Sollzustand
+- **actual device state**
+- **Loxone intent**, meaning the last state explicitly requested by Loxone
 
-Diese Trennung verhindert unnötige Schreibbefehle beim normalen Polling.
+This separation avoids unnecessary writes during normal polling and makes external/manual control predictable.
 
-## Gemeinsame Außeneinheit
+## Shared outdoor unit
 
-Wenn mehrere Innengeräte an derselben Außeneinheit hängen, können bestimmte Kombinationen von Betriebsarten technisch unzulässig sein. Die Bridge kennt deshalb Gerätegruppen und verhindert widersprüchliche Modi, beispielsweise gleichzeitiges Heizen und Kühlen innerhalb derselben Gruppe.
+In multi-split systems, indoor units connected to the same outdoor unit cannot always select operating modes independently. The bridge supports device groups and rejects conflicting mode combinations, such as heating and cooling at the same time within one configured group.
 
-## Voraussetzungen
+## Requirements
 
-- Linux, getestet auf DietPi/Debian
+- Linux; developed and tested on DietPi / Debian
 - Python 3
-- lokale Netzwerkverbindung zu den WF-RAC-Adaptern
-- passende WF-RAC Parser-/Protokollbibliothek
-- Geräte-/Operator-Identität für die lokale Kommunikation
+- local network connectivity to the WF-RAC adapters
+- a compatible WF-RAC parser / protocol library
+- device/operator identity data required for local WF-RAC communication
 
-## Konfiguration
+## Configuration
 
-Produktive Dateien werden nicht veröffentlicht:
+Production files are intentionally not published:
 
 ```text
 config.json
@@ -78,18 +78,18 @@ state/
 logs/
 ```
 
-Vorlagen:
+Templates are provided as:
 
 - [`config.example.json`](config.example.json)
 - [`identity.example.json`](identity.example.json)
 
-Die Dateien enthalten Platzhalter und müssen für die eigene Anlage angepasst werden.
+Copy and adapt them for your own installation.
 
-Unter `service.write_client_ip` wird die einzige entfernte IP eingetragen, die Steuerbefehle senden darf – typischerweise der Loxone Miniserver. Status-, Health- und Diagnose-Endpunkte bleiben lesbar.
+`service.write_client_ip` defines the only remote IP address allowed to send control commands, typically the Loxone Miniserver. Status, health, and diagnostic endpoints remain readable.
 
-## HTTP-API
+## HTTP API
 
-### Gesamtstatus
+### Overall status
 
 ```text
 GET http://<HOST>:8091/status
@@ -102,24 +102,24 @@ GET http://<HOST>:8091/api/v1/status
 GET http://<HOST>:8091/health
 ```
 
-Der Health-Endpunkt meldet `online=true`, wenn mindestens ein konfiguriertes Gerät erreichbar ist. Für eine vollständige Bewertung immer den Gesamtstatus bzw. alle Geräte betrachten.
+`/health` reports `online=true` when at least one configured device is reachable. For complete monitoring of multi-device systems, evaluate `/status` and the state of every device.
 
-### Geräte auflisten
+### List configured devices
 
 ```text
 GET http://<HOST>:8091/api/v1/devices
 ```
 
-### Einzelstatus
+### Per-device status
 
 ```text
 GET http://<HOST>:8091/ac1/status
 GET http://<HOST>:8091/ac2/status
 ```
 
-### Steuerung
+### Control
 
-Beispiele:
+Examples:
 
 ```text
 GET http://<HOST>:8091/ac1/power?value=1
@@ -129,38 +129,36 @@ GET http://<HOST>:8091/ac1/fan?value=auto
 GET http://<HOST>:8091/ac1/direction?value=...
 ```
 
-Mehrere Werte können über den `set`-Endpunkt kombiniert werden.
+Multiple parameters can be combined through the `set` endpoint.
 
-Alle schreibenden Geräte-Endpunkte akzeptieren nur die freigegebene Steuer-IP sowie localhost. Status- und Diagnose-Endpunkte bleiben lesbar.
+All write endpoints accept requests only from the configured controller IP and localhost. Status and diagnostic endpoints remain readable.
 
-## Wichtige Log-Marker
+## Important log markers
 
-Die Bridge erzeugt bewusst aussagekräftige Marker:
+- `CMD_START` – control command started
+- `CMD_OK` – command completed and was verified
+- `CMD_FAIL` – command failed
+- `CMD_CONFLICT` – group/mode conflict prevented
+- `DEVICE_OFFLINE` – device marked offline after communication errors
+- `DEVICE_RECOVERED` – communication restored
+- `EXTERNAL_DRIFT` – actual state changed outside Loxone
 
-- `CMD_START` – Steuerbefehl begonnen
-- `CMD_OK` – Befehl erfolgreich verifiziert
-- `CMD_FAIL` – Befehl fehlgeschlagen
-- `CMD_CONFLICT` – Gruppen-/Moduskonflikt verhindert
-- `DEVICE_OFFLINE` – Gerät nach Kommunikationsfehlern offline
-- `DEVICE_RECOVERED` – Kommunikation wiederhergestellt
-- `EXTERNAL_DRIFT` – Ist-Zustand wurde außerhalb von Loxone verändert
+## Passive polling guarantee
 
-## Passive Polling-Garantie
-
-Der Polling-Pfad darf selbst keine Steuerbefehle erzeugen. Das ist ein zentrales Designziel dieses Projekts. Änderungen an der Polling-Logik sollten deshalb besonders sorgfältig geprüft werden.
+The polling path must never generate control writes by itself. This is a central design goal and changes to polling logic should be reviewed especially carefully.
 
 ## Loxone
 
-Siehe [`docs/loxone.md`](docs/loxone.md).
+See [`docs/loxone.md`](docs/loxone.md).
 
-## Fehlersuche
+## Troubleshooting
 
-Siehe [`docs/troubleshooting.md`](docs/troubleshooting.md).
+See [`docs/troubleshooting.md`](docs/troubleshooting.md).
 
-## Reverse Engineering
+## Reverse engineering notes
 
-Protokollbeobachtungen und neue Funktionen sollten in der Dokumentation immer als **verifiziert**, **experimentell** oder **unbekannt** gekennzeichnet werden. So bleibt nachvollziehbar, was am realen Gerät bestätigt wurde und was nur aus Telegrammen/Verhalten abgeleitet ist.
+Protocol findings and device-specific behavior should be labeled as **Verified**, **Experimental**, or **Unknown**. This makes it clear which behavior was reproduced on real hardware and which conclusions are still provisional.
 
-## Lizenz
+## License
 
-MIT License – siehe [`LICENSE`](LICENSE).
+MIT License – see [`LICENSE`](LICENSE).

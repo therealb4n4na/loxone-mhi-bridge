@@ -1,24 +1,24 @@
-# Loxone-Einbindung
+# Loxone integration
 
 ## Status
 
-Gesamtstatus:
+Overall status:
 
 ```text
 http://<DIETPI-IP>:8091/status
 ```
 
-Einzelgerät:
+Per-device status:
 
 ```text
 http://<DIETPI-IP>:8091/ac1/status
 ```
 
-Empfohlenes Loxone-Polling: etwa 10–30 Sekunden. Die Bridge pollt die Geräte intern selbst und Loxone liest nur den Cache.
+A Loxone polling interval of roughly 10–30 seconds is usually appropriate. The bridge polls the air conditioners internally; Loxone only reads the cached bridge state.
 
-## Schreiben
+## Writing values
 
-Beispiele:
+Examples:
 
 ```text
 /ac1/power?value=1
@@ -27,14 +27,14 @@ Beispiele:
 /ac1/fan?value=auto
 ```
 
-Die Bridge führt die eigentliche Gerätekommunikation aus und verifiziert den Zustand anschließend.
+The bridge performs the actual WF-RAC communication and verifies the resulting device state afterwards.
 
-## Gemeinsame Außeneinheit
+## Shared outdoor unit
 
-Bei Multi-Split-Systemen darf Loxone nicht davon ausgehen, dass jedes Innengerät völlig unabhängig seine Betriebsart wählen kann. Die Bridge prüft Konflikte innerhalb der konfigurierten Gruppe und lehnt unzulässige Kombinationen ab.
+With multi-split systems, Loxone must not assume that every indoor unit can freely select an independent mode. The bridge checks conflicts inside the configured group and rejects invalid combinations.
 
-## Externe Bedienung
+## External control
 
-Eine Änderung über Fernbedienung oder eine andere Bedienoberfläche wird vom Poller eingelesen. Die Bridge protokolliert eine Abweichung vom zuletzt bekannten Loxone-Intent als `EXTERNAL_DRIFT`; der Poller schreibt den alten Loxone-Wert nicht automatisch wieder zurück.
+Changes made with the physical remote or another control interface are picked up by the passive poller. A deviation from the last known Loxone intent is logged as `EXTERNAL_DRIFT`; the poller does not automatically write the old Loxone value back.
 
-Das verhindert einen unerwünschten "Kampf" zwischen Loxone und manueller Bedienung.
+This prevents a control "fight" between Loxone and manual operation.

@@ -1,41 +1,41 @@
 ---
 name: Bug report
-about: Reproduzierbaren Fehler melden
+about: Report a reproducible problem
 title: "[Bug] "
 labels: ""
 assignees: ""
 ---
 
-## Projektversion
+## Project version
 
-<!-- z. B. v1.0.0 oder Commit-SHA -->
+<!-- e.g. v1.0.0 or commit SHA -->
 
-## Umgebung
+## Environment
 
-- Hardware / Gerät:
+- Hardware / device:
 - OS:
 - Python:
-- Loxone-Version (falls relevant):
+- Loxone version (if relevant):
 
-## Fehlerbeschreibung
+## Problem description
 
 
-## Schritte zum Reproduzieren
+## Steps to reproduce
 
 1.
 2.
 3.
 
-## Erwartetes Verhalten
+## Expected behavior
 
 
-## Tatsächliches Verhalten
+## Actual behavior
 
 
-## Logs / Status
+## Logs / status
 
 ```text
-Bitte nur relevante Zeilen und KEINE Passwörter, Tokens oder privaten Schlüssel einfügen.
+Include only relevant lines. Do NOT include passwords, tokens, private keys, or other secrets.
 ```
 
-## Bereits getestet
+## Already tested

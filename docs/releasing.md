@@ -1,27 +1,27 @@
-# Release-Prozess
+# Release process
 
-Das Projekt verwendet **Semantic Versioning** (`MAJOR.MINOR.PATCH`).
+This project follows **Semantic Versioning** (`MAJOR.MINOR.PATCH`).
 
-- `MAJOR`: inkompatible Änderungen an API, Konfiguration oder Verhalten
-- `MINOR`: rückwärtskompatible neue Funktionen
-- `PATCH`: rückwärtskompatible Fehlerbehebungen und Dokumentationskorrekturen
+- `MAJOR`: incompatible API, configuration, or behavior changes
+- `MINOR`: backward-compatible new features
+- `PATCH`: backward-compatible fixes and documentation corrections
 
-## Ablauf
+## Process
 
-1. Änderung implementieren und real testen.
-2. README und technische Dokumentation aktualisieren.
-3. `CHANGELOG.md` unter `Unreleased` ergänzen.
-4. Syntax-/Plausibilitätsprüfung durchführen.
-5. Commit auf `main` erstellen.
-6. Changelog von `Unreleased` in die neue Versionsnummer überführen.
-7. Annotierten Git-Tag erstellen und nach GitHub pushen.
-8. Optional auf GitHub aus dem Tag ein Release mit den Changelog-Notizen erstellen.
+1. Implement the change and test it on real target hardware where applicable.
+2. Update the README and technical documentation.
+3. Add the change under `Unreleased` in `CHANGELOG.md`.
+4. Run syntax and plausibility checks.
+5. Commit the tested state to `main`.
+6. Move the relevant changelog entries from `Unreleased` to the new version.
+7. Create an annotated Git tag and push it to GitHub.
+8. Create a GitHub Release from that tag using the changelog notes.
 
-Beispiel:
+Example:
 
 ```bash
 git tag -a v1.2.0 -m "Release v1.2.0"
 git push origin v1.2.0
 ```
 
-Releases sollen nur Zustände markieren, die auf der realen Zielhardware ausreichend getestet wurden.
+A release should only mark a state that has been sufficiently tested on the intended real hardware.
