@@ -3,7 +3,7 @@
 <!-- project-meta -->
 > **Status:** Stable · **Current release:** `v3.3.0` · **License:** MIT · **Documentation:** Deutsch · **Issues/PRs:** Deutsch or English
 
-[Changelog](CHANGELOG.md) · [Contributing](CONTRIBUTING.md) · [Security](SECURITY.md) · [Loxone-Doku](docs/loxone.md) · [Troubleshooting](docs/troubleshooting.md)
+[Changelog](CHANGELOG.md) · [Contributing](CONTRIBUTING.md) · [Security](SECURITY.md) · [Loxone-Doku](docs/loxone.md) · [Troubleshooting](docs/troubleshooting.md) · [Project collection](https://github.com/therealb4n4na/loxone-smart-home-projects)
 <!-- /project-meta -->
 
 Lokale Python-Bridge zur Einbindung von Mitsubishi Heavy Industries Klimageräten mit WF-RAC WLAN-Adaptern in Loxone.
