@@ -1,5 +1,11 @@
 # Loxone MHI WF-RAC Bridge
 
+<!-- project-meta -->
+> **Status:** Stable · **Current release:** `v3.3.0` · **License:** MIT · **Documentation:** Deutsch · **Issues/PRs:** Deutsch or English
+
+[Changelog](CHANGELOG.md) · [Contributing](CONTRIBUTING.md) · [Security](SECURITY.md) · [Loxone-Doku](docs/loxone.md) · [Troubleshooting](docs/troubleshooting.md)
+<!-- /project-meta -->
+
 Lokale Python-Bridge zur Einbindung von Mitsubishi Heavy Industries Klimageräten mit WF-RAC WLAN-Adaptern in Loxone.
 
 Das Projekt verfolgt ein wichtiges Prinzip: **Polling ist ausschließlich lesend.** Die Klimageräte werden nur verändert, wenn ein expliziter Steuerbefehl eingeht. Dadurch bleiben Fernbedienung und andere Bedienwege weiterhin nutzbar.
