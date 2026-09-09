@@ -1,0 +1,41 @@
+{
+  "schema_version": 1,
+  "parser_path": "/opt/mhi-wfrac",
+  "identity_file": "/opt/mhi-bridge/identity.json",
+  "service": {
+    "listen_address": "0.0.0.0",
+    "listen_port": 8091,
+    "write_client_ip": "192.168.1.50",
+    "poll_interval": 10.0,
+    "min_request_gap": 0.35,
+    "request_timeout": 5.0,
+    "inter_device_delay": 0.5
+  },
+  "groups": [
+    {
+      "id": "outdoor1",
+      "name": "Shared outdoor unit",
+      "conflict_policy": "reject"
+    }
+  ],
+  "devices": [
+    {
+      "id": "ac1",
+      "alias": "living_room",
+      "name": "Living Room",
+      "ip": "192.168.x.x",
+      "port": 51443,
+      "aircon_id": "YOUR_AIRCON_ID_1",
+      "group": "outdoor1"
+    },
+    {
+      "id": "ac2",
+      "alias": "bedroom",
+      "name": "Bedroom",
+      "ip": "192.168.x.x",
+      "port": 51443,
+      "aircon_id": "YOUR_AIRCON_ID_2",
+      "group": "outdoor1"
+    }
+  ]
+}

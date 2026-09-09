@@ -1,0 +1,23 @@
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+
+# Installation-specific identity / runtime state
+identity.json
+state/
+logs/
+
+# Local configuration
+config.json
+
+# Backups / temporary files
+backups/
+*.bak
+*.bak.*
+*.backup*
+*.before-*
+*.working
+*~
+.DS_Store
