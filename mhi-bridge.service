@@ -1,0 +1,39 @@
+[Unit]
+Description=Mitsubishi WF-RAC to Loxone HTTP Bridge
+Wants=network-online.target
+After=network-online.target
+
+[Service]
+Type=simple
+User=automation
+Group=automation
+WorkingDirectory=/opt/mhi-bridge
+ExecStart=/usr/bin/python3 -u /opt/mhi-bridge/mhi_bridge.py
+Restart=on-failure
+RestartSec=10
+Environment=PYTHONDONTWRITEBYTECODE=1
+UMask=0077
+
+NoNewPrivileges=true
+PrivateTmp=true
+PrivateDevices=true
+ProtectSystem=strict
+ProtectHome=true
+ReadWritePaths=/opt/mhi-bridge/state /opt/mhi-bridge/logs /opt/mhi-bridge/identity.json
+ProtectKernelTunables=true
+ProtectKernelModules=true
+ProtectKernelLogs=true
+ProtectControlGroups=true
+RestrictSUIDSGID=true
+RestrictRealtime=true
+RestrictNamespaces=true
+LockPersonality=true
+SystemCallArchitectures=native
+RestrictAddressFamilies=AF_UNIX AF_INET AF_INET6
+CapabilityBoundingSet=
+AmbientCapabilities=
+ProtectProc=invisible
+ProcSubset=pid
+
+[Install]
+WantedBy=multi-user.target
