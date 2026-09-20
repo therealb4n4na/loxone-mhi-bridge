@@ -437,8 +437,8 @@ def load_identity():
         identity = load_json(identity_file)
     else:
         identity = {
-            "operator_id": f"loxberry-{str(uuid.uuid4())[7:]}",
-            "device_id": f"loxberry-device-{uuid.uuid4().hex[21:]}",
+            "operator_id": f"dietpi-{str(uuid.uuid4())[7:]}",
+            "device_id": f"dietpi-device-{uuid.uuid4().hex[21:]}",
         }
         with identity_file.open("w", encoding="utf-8") as file:
             json.dump(identity, file, indent=2)
