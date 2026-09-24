@@ -1,5 +1,10 @@
 # Loxone MHI WF-RAC Bridge
 
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
+![Python 3](https://img.shields.io/badge/Python-3.x-blue.svg)
+![Platform](https://img.shields.io/badge/Linux-DietPi%20%2F%20Debian-informational.svg)
+![Control model](https://img.shields.io/badge/Polling-read--only-success.svg)
+
 <!-- project-meta -->
 > **Status:** Stable · **Current release:** `v3.3.0` · **License:** MIT · **Documentation:** English · **Issues/PRs:** English preferred
 
@@ -10,7 +15,7 @@ A local Python bridge for integrating Mitsubishi Heavy Industries air conditione
 
 A core design rule of this project is: **polling is read-only**. The bridge only changes an air conditioner when an explicit control request is received. This keeps the physical remote control and other control paths usable instead of constantly forcing the last Loxone state back onto the device.
 
-## Features
+## What this project gives you
 
 - local polling of multiple WF-RAC devices
 - power, operating mode, target temperature, fan speed, and airflow control
@@ -58,6 +63,12 @@ This separation avoids unnecessary writes during normal polling and makes extern
 ## Shared outdoor unit
 
 In multi-split systems, indoor units connected to the same outdoor unit cannot always select operating modes independently. The bridge supports device groups and rejects conflicting mode combinations, such as heating and cooling at the same time within one configured group.
+
+## Tested hardware
+
+This project is developed and operated with **Mitsubishi Heavy Industries air conditioners using WF-RAC Wi-Fi adapters**. Multiple indoor units are used in the tested installation, including shared-outdoor-unit logic.
+
+The bridge intentionally documents the WF-RAC interface rather than claiming compatibility with every MHI indoor-unit model. Firmware and supported commands can differ, so additional hardware variants should be verified before being marked as tested.
 
 ## Requirements
 
